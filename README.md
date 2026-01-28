@@ -28,17 +28,17 @@ The intent is to **support human judgment**, not replace it.
 
 ## Notebooks
 
-### 1. Exploratory Data Analysis (`01_EDA.ipynb`)
+#### 1. Exploratory Data Analysis (`01_EDA.ipynb`)
 - Class balance and baseline risk assessment  
 - Distributional analysis (e.g., age, credit amount)  
 - Relationships between credit history, purpose, housing, and default risk  
 
-### 2. Data preprocessing (`02_data_preprocessing.ipynb`)
+#### 2. Data preprocessing (`02_data_preprocessing.ipynb`)
 - Feature encoding and transformation  
 - Train/test split  
 - Preprocessing designed to avoid data leakage  
 
-### 3. Modeling and validation (`03_modeling_and_validation.ipynb`)
+#### 3. Modeling and validation (`03_modeling_and_validation.ipynb`)
 - Baseline vs benchmark models  
 - ROC and Precision–Recall evaluation on test data  
 - Comparison of performance trade-offs relevant to early warning systems  
