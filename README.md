@@ -153,3 +153,5 @@ The primary contribution is not prediction alone, but a **structured, governance
 
 *This repository is intended for analytical demonstration and learning purposes only.*
 
+**Author**: Stéphanie Simon  
+**Focus**: Credit risk analysis, model governance, responsible analytics  
