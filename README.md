@@ -26,28 +26,6 @@ The intent is to **support human judgment**, not replace it.
 
 ---
 
-## Repository structure
-
-early-warning-credit-risk/
-├─ 01_dataset/
-│ └─ german.data
-├─ 02_notebooks/
-│ ├─ 01_EDA.ipynb
-│ ├─ 02_data_preprocessing.ipynb
-│ └─ 03_modeling_and_validation.ipynb
-├─ 04_figures/
-│ ├─ eda_class_balance.png
-│ ├─ eda_credit_amount_age_distribution.png
-│ ├─ eda_bad_rate_credit_history_purpose_housing.png
-│ ├─ modeling_and_validation_ROC_curves_test.png
-│ ├─ modeling_and_validation_precision_recall_curves_test.png
-│ └─ modeling_and_validation_precision_recall_curves_test_baseline_vs_benchmark.png
-├─ .gitignore
-└─ README.md
-
-
----
-
 ## Notebooks
 
 ### 1. Exploratory Data Analysis (`01_EDA.ipynb`)
