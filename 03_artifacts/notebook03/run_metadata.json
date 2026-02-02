@@ -1,0 +1,21 @@
+{
+  "notebook": "03_evaluation_benchmarks.ipynb",
+  "notes": "Evaluates baselines and trains Random Forest benchmark using identical governed preprocessing and split.",
+  "files_read": [
+    "notebook02/train_predictions.csv",
+    "notebook02/test_predictions.csv",
+    "notebook02/X_train.csv",
+    "notebook02/X_test.csv",
+    "notebook02/y_train.csv",
+    "notebook02/y_test.csv",
+    "notebook02/pipeline_logistic.joblib",
+    "notebook02/pipeline_l1_logistic.joblib"
+  ],
+  "files_written": [
+    "baseline_metrics.csv",
+    "all_model_metrics.csv",
+    "threshold_table.csv",
+    "rf_test_predictions.csv",
+    "rf_benchmark.joblib"
+  ]
+}

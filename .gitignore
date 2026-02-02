@@ -13,46 +13,24 @@ __pycache__/
 .idea/
 
 # =====================================================
-# Raw data (do not version large or external datasets)
+# Temporary / cache files
 # =====================================================
-01_dataset/*.zip
-01_dataset/*.tar
-01_dataset/*.gz
-
-# (German Credit is small and public → OK to keep if you want)
-# If you prefer to exclude it, uncomment the next line:
-# 01_dataset/german.data
+*.log
+*.tmp
+*.swp
+*.bak
 
 # =====================================================
-# Artifacts — ignore by default
+# Environment files
 # =====================================================
-03_artifacts/**
+.env
+.env.*
+.venv/
+venv/
 
 # =====================================================
-# Keep GOVERNANCE-RELEVANT artifacts only
+# Notes
 # =====================================================
+# All datasets, figures, notebooks, and artifacts
+# are intentionally versioned for full reproducibility.
 
-# --- Notebook 01 (EDA / target definition) ---
-!03_artifacts/**/run_metadata.json
-!03_artifacts/**/data_dictionary.csv
-!03_artifacts/**/missingness_report.csv
-
-# --- Notebook 02 (modeling outputs to support evaluation) ---
-!03_artifacts/**/X_train.csv
-!03_artifacts/**/X_test.csv
-!03_artifacts/**/y_train.csv
-!03_artifacts/**/y_test.csv
-
-# Pipelines (lightweight, interpretable)
-!03_artifacts/**/pipeline_logistic.joblib
-!03_artifacts/**/pipeline_l1_logistic.joblib
-
-# --- Notebook 03 (evaluation & governance outputs) ---
-!03_artifacts/**/baseline_metrics.csv
-!03_artifacts/**/all_model_metrics.csv
-!03_artifacts/**/threshold_table.csv
-!03_artifacts/**/rf_benchmark.joblib
-
-# Figures used in README / interpretation
-!03_artifacts/**/modeling_evaluation_*.png
-!03_artifacts/**/eda_*.png

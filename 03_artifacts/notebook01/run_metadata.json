@@ -1,0 +1,12 @@
+{
+  "notebook": "01_setup_eda.ipynb",
+  "timestamp": "2026-02-01T22:29:39.544812",
+  "source_file": "german.data",
+  "n_rows": 1000,
+  "n_columns": 22,
+  "raw_target_column": "credit_risk",
+  "event_label_column": "y_bad",
+  "event_definition": "1 = bad credit, 0 = good credit",
+  "bad_rate": 0.3,
+  "notes": "EDA, target definition, class balance, and governance framing only. No preprocessing or modeling."
+}

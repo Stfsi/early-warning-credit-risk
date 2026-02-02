@@ -1,0 +1,42 @@
+{
+  "notebook": "02_preprocessing_modeling.ipynb",
+  "random_state": 2712,
+  "test_size": 0.2,
+  "excluded_columns": [
+    "y_bad",
+    "credit_risk"
+  ],
+  "n_train": 800,
+  "n_test": 200,
+  "bad_rate_train": 0.3,
+  "bad_rate_test": 0.3,
+  "numeric_columns": [
+    "duration_months",
+    "credit_amount",
+    "installment_rate",
+    "residence_since",
+    "age",
+    "existing_credits",
+    "num_dependents"
+  ],
+  "categorical_columns": [
+    "status_checking_account",
+    "credit_history",
+    "purpose",
+    "savings_account",
+    "employment_since",
+    "personal_status_sex",
+    "other_debtors",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "job",
+    "telephone",
+    "foreign_worker"
+  ],
+  "models": [
+    "logistic_regression",
+    "l1_logistic_regression"
+  ],
+  "notes": "Preprocessing + interpretable baseline models only. Evaluation and Random Forest benchmark in Notebook 03."
+}
