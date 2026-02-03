@@ -51,7 +51,7 @@ The target definition is **explicitly defined, validated, and frozen during EDA*
 ---
 
 ## Repository structure
-
+```
 early-warning-credit-risk/
 │
 ├── 01_dataset/
@@ -72,6 +72,7 @@ early-warning-credit-risk/
 │   └── modeling_evaluation_*.png
 │
 └── README.md
+```
 Artifacts are generated under `03_artifacts/` and **selectively versioned** to support interpretation, validation, and auditability.
 
 ---
