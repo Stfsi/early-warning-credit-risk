@@ -1,135 +1,201 @@
-# Early Warning Credit Risk
+# Early Warning Credit Risk Modeling  
+**Interpretable, governance-oriented risk analytics**
 
 ## TL;DR
-This project explores **early-warning credit risk modeling** using the German Credit dataset.  
-The focus is not on automating credit decisions, but on understanding **risk signals, trade-offs, and limitations** through interpretable models, appropriate evaluation metrics, and a governance-aware analytical workflow.
+This project builds an **early warning credit risk model** using the German Credit dataset, prioritizing **interpretability, auditability, and governance** over automated decision-making.
+
+Interpretable logistic models are evaluated against a Random Forest benchmark to illustrate **performance–transparency trade-offs** typical of regulated environments such as **banking, insurance, and audit**.
 
 ---
 
 ## Overview
+This repository develops a **governance-ready early warning credit risk pipeline** designed to support **risk identification and human review**, not automated approval or rejection decisions.
 
-This repository contains an **early-warning credit risk modeling project** designed as a structured, reproducible analysis.  
-The work examines how statistical and machine-learning models can support **early identification of elevated credit risk**, while maintaining interpretability, validation discipline, and explicit acknowledgment of uncertainty.
+The project emphasizes:
+- Interpretability over raw predictive performance  
+- Explicit target definition and documentation  
+- Strict separation between EDA, preprocessing, modeling, and evaluation  
+- Reproducible, reviewable artifacts suitable for audit and validation  
 
-The project is exploratory and educational in nature and does **not** claim production readiness.
-
----
-
-## Project objectives
-
-- Identify structural drivers associated with credit default risk  
-- Compare baseline and benchmark models from an early-warning perspective  
-- Evaluate models using metrics suited to **imbalanced classification**  
-- Emphasize interpretability, validation, and responsible use  
-
-The intent is to **support human judgment**, not replace it.
+The structure mirrors how models are typically developed and assessed in **regulated financial institutions**.
 
 ---
 
-## Notebooks
+## Why early warning credit risk?
+Early warning systems aim to detect **elevated risk before default**, enabling organizations to:
+- Prioritize accounts for human review  
+- Allocate monitoring and oversight resources  
+- Manage trade-offs between false positives and missed risk events  
 
-#### 1. Exploratory Data Analysis (`01_EDA.ipynb`)
-- Class balance and baseline risk assessment  
-- Distributional analysis (e.g., age, credit amount)  
-- Relationships between credit history, purpose, housing, and default risk  
-
-#### 2. Data preprocessing (`02_data_preprocessing.ipynb`)
-- Feature encoding and transformation  
-- Train/test split  
-- Preprocessing designed to avoid data leakage  
-
-#### 3. Modeling and validation (`03_modeling_and_validation.ipynb`)
-- Baseline vs benchmark models  
-- ROC and Precision–Recall evaluation on test data  
-- Comparison of performance trade-offs relevant to early warning systems  
+In regulated contexts, models must be **explainable, reviewable, and defensible**—not merely accurate.
 
 ---
 
-## Modeling perspective
+## Dataset
+**Source:** German Credit Dataset (UCI Machine Learning Repository)  
+**Observations:** 1,000  
 
-The modeling approach prioritizes:
+**Target variable**
+- Original encoding:  
+  - `1` = good credit  
+  - `2` = bad credit  
 
-- Early detection of elevated risk rather than final decisioning  
-- Metrics that reflect asymmetric error costs  
-- Transparency and traceability over maximal predictive power  
+**Early warning event definition**
+- `y_bad = 1` → bad credit (risk event)  
+- `y_bad = 0` → good credit  
 
-Precision–recall analysis is emphasized, as it better reflects performance under class imbalance.
+**Event rate:** ~30%
 
----
-
-## Results
-
-### Classification performance
-
-- Benchmark models demonstrate improved discriminatory power relative to the baseline.  
-- ROC curves show moderate gains, while Precision–Recall curves reveal clearer differences in early-warning–relevant regions.  
-- Improved recall is achieved at the cost of reduced precision, highlighting the trade-off between sensitivity and false positives.  
-
-All performance visualizations are available in `04_figures/`.
+The target definition is **explicitly defined, validated, and frozen during EDA** to prevent downstream analytical drift.
 
 ---
 
-## Analysis
+## Repository structure
 
-### Early-warning interpretation
-
-From an early-warning perspective:
-
-- Model value lies in its ability to **surface elevated risk earlier**, even if conservative.  
-- Performance should be interpreted in terms of **screening utility**, not final approval accuracy.  
-- Threshold selection remains application-specific and intentionally unconstrained here.
-
----
-
-### Interpretability and robustness
-
-- Feature effects align with established credit risk drivers (credit history, financial burden, purpose).  
-- No opaque feature engineering was introduced.  
-- Model behavior is stable across training and test sets, supporting internal consistency.
-
----
-
-### Limitations
-
-- The dataset is small and static, limiting external validity.  
-- Historical patterns may encode socio-economic bias.  
-- No calibration, fairness metrics, or monitoring framework is implemented.  
-- Results are context-dependent and not generalizable without further validation.
+early-warning-credit-risk/
+│
+├── 01_dataset/
+│   └── german.data
+│
+├── 02_notebooks/
+│   ├── 01_EDA.ipynb
+│   ├── 02_data_preprocessing.ipynb
+│   └── 03_modeling_and_validation.ipynb
+│
+├── 03_artifacts/
+│   ├── notebook01/
+│   ├── notebook02/
+│   └── notebook03/
+│
+├── 04_figures/
+│   ├── eda_*.png
+│   └── modeling_evaluation_*.png
+│
+└── README.md
+Artifacts are generated under `03_artifacts/` and **selectively versioned** to support interpretation, validation, and auditability.
 
 ---
 
-### Governance considerations
+## Methodology
 
-The results illustrate key governance tensions in credit modeling:
+### 1. Exploratory Data Analysis & Target Definition (Notebook 01)
 
-- Increased sensitivity improves early detection but raises operational and ethical questions.  
-- Model outputs should be treated as **signals**, not prescriptions.  
-- Any deployment would require additional validation, documentation, and oversight layers.
+**Objectives**
+- Validate data integrity and structure  
+- Define and freeze the early warning target  
+- Analyze class imbalance and event prevalence  
+- Verify plausible credit risk signals  
 
----
+**Key outputs**
+- `data_dictionary.csv`  
+- `missingness_report.csv`  
+- `german_credit_with_y_bad.csv`  
+- `run_metadata.json`  
+- EDA figures (class balance, distributions, bad rates by variable)  
 
-## Summary
-
-This project demonstrates that:
-
-- Early-warning credit risk modeling can be informative even with modest data.  
-- Evaluation must go beyond accuracy and ROC-AUC.  
-- Responsible use requires explicit acknowledgment of uncertainty and limits.
-
-The primary contribution is not prediction alone, but a **structured, governance-aware analytical process**.
-
----
-
-## Next steps (out of scope)
-
-- Fairness and bias diagnostics  
-- Model calibration and threshold optimization  
-- Stress testing under distribution shift  
-- Formal validation and governance documentation  
+**Governance principle**  
+No preprocessing or modeling decisions are made **before the target definition is finalized and documented**.
 
 ---
 
-*This repository is intended for analytical demonstration and learning purposes only.*
+### 2. Preprocessing & Interpretable Models (Notebook 02)
 
-**Author**: Stéphanie Simon  
-**Focus**: Credit risk analysis, model governance, responsible analytics  
+**Design choices**
+- Stratified train/test split  
+- Preprocessing pipelines fit **only on training data**  
+- Numeric features: median imputation + standardization  
+- Categorical features: most-frequent imputation + one-hot encoding  
+- Explicit leakage prevention (raw target columns excluded)  
+
+**Models**
+- Logistic Regression (interpretable baseline)  
+- L1-regularized Logistic Regression (feature sparsity and stability)  
+
+**Key governed outputs**
+- Fitted pipelines  
+  - `pipeline_logistic.joblib`  
+  - `pipeline_l1_logistic.joblib`  
+- Train/test splits  
+  - `X_train.csv`, `X_test.csv`, `y_train.csv`, `y_test.csv`  
+- Probability outputs  
+  - `train_predictions.csv`, `test_predictions.csv`  
+- Execution metadata  
+  - `run_metadata.json`
+
+---
+
+### 3. Evaluation & Benchmarking (Notebook 03)
+
+Evaluation focuses on **early warning performance**, not accuracy alone.
+
+**Metrics**
+- ROC-AUC (ranking performance)  
+- PR-AUC (more informative under class imbalance)  
+- Threshold-based precision, recall, and false positive rate  
+
+Threshold selection is treated as a **governance decision**, reflecting operational capacity and risk tolerance.
+
+**Benchmark model**
+- Random Forest trained on the **same governed train/test split**  
+- Uses the **same fitted preprocessing transformer** learned by the logistic baseline  
+- Included strictly as a **performance reference**, not as a default deployment model  
+
+---
+
+## Results (test set)
+
+| Model                     | ROC-AUC | PR-AUC |
+|---------------------------|--------:|-------:|
+| Logistic Regression       | ~0.78   | ~0.61  |
+| L1 Logistic Regression    | ~0.78   | ~0.62  |
+| Random Forest (benchmark) | ~0.82   | ~0.70  |
+
+**Key takeaway**
+- Interpretable models provide strong early warning signals  
+- Performance gains from more complex models come with **reduced transparency and governance challenges**
+
+---
+
+## Figures
+The `04_figures/` directory contains:
+- EDA figures (class balance, distributions, bad rates by variable)  
+- ROC and Precision–Recall curves for baseline and benchmark models  
+
+These figures support **model interpretation and review**, not presentation-only reporting.
+
+---
+
+## Governance & reproducibility
+This project explicitly demonstrates:
+- Separation of analytical responsibilities across stages  
+- Frozen targets and documented assumptions  
+- Selective artifact versioning  
+- Reproducible pipelines without requiring reviewers to re-run notebooks  
+
+Key evaluation outputs include:
+- `baseline_metrics.csv`  
+- `all_model_metrics.csv`  
+- `threshold_table.csv`  
+
+These files support **auditability, validation, and independent review**.
+
+---
+
+## What this project is (and is not)
+
+**This project is**
+- A decision-support modeling exercise  
+- Designed for regulated environments  
+- Focused on transparency, traceability, and governance  
+
+**This project is not**
+- An automated credit approval system  
+- A production deployment  
+- An optimization exercise that sacrifices interpretability  
+
+---
+
+## Author
+**Stéphanie Simon**  
+Statistics student (B.Sc. Mathematics – Statistics)  
+Interests: risk analytics, audit analytics, model governance  
